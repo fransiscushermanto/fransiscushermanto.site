@@ -1,0 +1,22 @@
+@layer reset, base, tokens, recipes, utilities;
+
+@layer base {
+  html,
+  body {
+    font-family: var(--font-geist-sans);
+
+    display: flex;
+    flex-direction: column;
+
+    height: auto;
+  }
+}
+
+@layer utilities {
+  .color-switch {
+    position: fixed;
+
+    top: 1.25rem;
+    right: 1.25rem;
+  }
+}
