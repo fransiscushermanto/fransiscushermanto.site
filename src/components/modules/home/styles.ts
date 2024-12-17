@@ -5,6 +5,8 @@ export const home = sva({
   slots: ["root", "profile-picture", "profile-info", "profile-social-media"],
   base: {
     root: {
+      zIndex: 1,
+
       width: "100%",
       maxWidth: "md",
       minHeight: "token(100dvh, 100vh)",
@@ -21,6 +23,32 @@ export const home = sva({
       rowGap: "6",
 
       backgroundColor: "bg",
+
+      "& .background": {
+        zIndex: -1,
+        position: "fixed",
+
+        pointerEvents: "none",
+        userSelect: "none",
+
+        width: "100%",
+        height: "100%",
+
+        display: "flex",
+
+        "& svg": {
+          width: "100%",
+          height: "100%",
+
+          fill: {
+            _dark: "token(colors.tertiary/40)",
+            _light: "token(colors.primary)",
+          },
+
+          maskImage:
+            "radial-gradient(50vh circle at center, token(colors.white), transparent)",
+        },
+      },
     },
     "profile-picture": {
       overflow: "hidden",

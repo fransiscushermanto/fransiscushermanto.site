@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Image from "next/image";
 import { CiLocationOn } from "react-icons/ci";
 import { IconButton, Text } from "@chakra-ui/react";
@@ -6,7 +7,7 @@ import { home } from "./styles";
 
 import profilePicture from "./assets/me.jpeg";
 import { SOCIAL_MEDIAS } from "./constants";
-import Link from "next/link";
+import { DottedBackground } from "./shapes";
 
 const Home = () => {
   return (
@@ -50,6 +51,9 @@ const Home = () => {
           </li>
         ))}
       </ul>
+      <div className="background">
+        <DottedBackground />
+      </div>
     </div>
   );
 };
