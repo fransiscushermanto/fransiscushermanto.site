@@ -72,61 +72,81 @@ export const config = defineConfig({
         },
       },
     },
+    keyframes: {
+      ripples: {
+        "0%": {
+          transform: "translate(-50%, -50%) scale(1)",
+          opacity: 0.4,
+        },
+        "100%": {
+          transform: "translate(-50%, -50%) scale(3)",
+          opacity: 0,
+        },
+      },
+    },
     semanticTokens: {
       colors: {
+        background: {
+          value: "hsl(var(--background))",
+        },
+        foreground: {
+          value: "hsl(var(--foreground))",
+        },
+        card: {
+          value: "hsl(var(--card))",
+        },
+        "card-foreground": {
+          value: "hsl(var(--card-foreground))",
+        },
+        popover: {
+          value: "hsl(var(--popover))",
+        },
+        "popover-foreground": {
+          value: "hsl(var(--popover-foreground))",
+        },
         primary: {
-          value: "{colors.primary.500}",
+          value: "hsl(var(--primary))",
+        },
+        "primary-foreground": {
+          value: "hsl(var(--primary-foreground))",
         },
         secondary: {
-          value: "{colors.secondary.100}",
-          description:
-            "Colors for secondary text, borders, icons, or background sections",
+          value: "hsl(var(--secondary))",
         },
-        tertiary: {
-          value: "#F4F1E1",
-          description:
-            "Colors for backgrounds, card elements, or even hover states",
+        "secondary-foreground": {
+          value: "hsl(var(--secondary-foreground))",
+        },
+        muted: {
+          value: "hsl(var(--muted))",
+        },
+        "muted-foreground": {
+          value: "hsl(var(--muted-foreground))",
         },
         accent: {
-          value: "#F8C146",
-          description:
-            "Colors for highlights or key interactions (such as button hover states) to create contrast and vibrancy",
+          value: "hsl(var(--accent))",
         },
-        link: {
-          value: "#2D6A5D",
-          description: "Colors for links, small icons, or hover effects",
+        "accent-foreground": {
+          value: "hsl(var(--accent-foreground))",
         },
-        bg: {
-          DEFAULT: {
-            value: {
-              _light: "{colors.secondary}",
-              _dark: "{colors.primary.800}",
-            },
-          },
+        destructive: {
+          value: "hsl(var(--destructive))",
         },
-        fg: {
-          DEFAULT: {
-            value: {
-              _light: "{colors.primary}",
-              _dark: "{colors.primary.100}",
-            },
-          },
+        "destructive-foreground": {
+          value: "hsl(var(--destructive-foreground))",
         },
-        "text-primary": {
-          DEFAULT: {
-            value: {
-              _light: "{colors.primary}",
-              _dark: "{colors.primary.100}",
-            },
-          },
+        border: {
+          value: "hsl(var(--border))",
         },
-        "text-secondary": {
-          DEFAULT: {
-            value: {
-              _light: "{colors.secondary.700}",
-              _dark: "{colors.secondary}",
-            },
-          },
+        input: {
+          value: "hsl(var(--input))",
+        },
+        ring: {
+          value: "hsl(var(--ring))",
+        },
+      },
+      radii: {
+        radius: {
+          value: "var(--radius)",
         },
       },
     },

@@ -1,1 +1,1 @@
-export { default as Home } from "./Lazy";
+export { default as Home } from "./Home";

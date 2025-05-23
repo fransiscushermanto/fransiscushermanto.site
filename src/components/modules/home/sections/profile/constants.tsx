@@ -1,25 +1,28 @@
-import { FaLinkedinIn, FaInstagram, FaGithub } from "react-icons/fa";
-import { MdMailOutline } from "react-icons/md";
+import { LuGithub, LuLinkedin, LuMail, LuInstagram } from "react-icons/lu";
 
 export const SOCIAL_MEDIAS = [
   {
     name: "linkedin",
-    icon: <FaLinkedinIn />,
+    icon: <LuLinkedin />,
     href: "https://www.linkedin.com/in/fransiscushermanto/",
+    label: "LinkedIn",
   },
   {
     name: "github",
-    icon: <FaGithub />,
+    icon: <LuGithub />,
     href: "https://github.com/fransiscushermanto",
+    label: "Github",
   },
   {
     name: "instagram",
-    icon: <FaInstagram />,
+    icon: <LuInstagram />,
     href: "https://www.instagram.com/frans_huang/",
+    label: "Instagram",
   },
   {
     name: "email",
-    icon: <MdMailOutline />,
+    icon: <LuMail />,
     href: "mailto:fransiscus.huang47@gmail.com",
+    label: "Email",
   },
 ];
