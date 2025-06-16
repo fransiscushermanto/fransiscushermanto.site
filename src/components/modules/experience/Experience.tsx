@@ -1,7 +1,16 @@
 import { LuBriefcase, LuMapPin, LuCalendar } from "react-icons/lu";
-import { Icon, Tag, Text, Timeline } from "@chakra-ui/react";
+import { Icon, Text } from "@chakra-ui/react";
 import { cx } from "@pandacss/css";
 
+import {
+  TimelineRoot,
+  TimelineItem,
+  TimelineConnector,
+  TimelineContent,
+  TimelineIndicator,
+  TimelineTitle,
+} from "@/components/ui/timeline";
+import { Tag } from "@/components/ui/tag";
 import { EXPERIENCES } from "@/constants/experiences";
 
 import { experienceCss } from "./styles";
@@ -15,11 +24,7 @@ const Experience = () => {
           A summary of my professional journey, highlighting key roles and
           achievements.
         </p>
-        <Timeline.Root
-          textAlign="left"
-          className="experience-journey"
-          size="lg"
-        >
+        <TimelineRoot textAlign="left" className="experience-journey" size="lg">
           {EXPERIENCES.map(
             (
               {
@@ -33,19 +38,18 @@ const Experience = () => {
               },
               i,
             ) => (
-              <Timeline.Item
+              <TimelineItem
                 data-current={current}
                 key={i}
                 className="experience-journey__item"
               >
-                <Timeline.Connector>
-                  <Timeline.Separator />
-                  <Timeline.Indicator>
+                <TimelineConnector>
+                  <TimelineIndicator>
                     {current && <LuBriefcase />}
-                  </Timeline.Indicator>
-                </Timeline.Connector>
-                <Timeline.Content className="experience-journey__content">
-                  <Timeline.Title
+                  </TimelineIndicator>
+                </TimelineConnector>
+                <TimelineContent className="experience-journey__content">
+                  <TimelineTitle
                     justifyContent="space-between"
                     className="job__row"
                   >
@@ -67,7 +71,7 @@ const Experience = () => {
                         </span>
                         <span className="company-name">{company}</span>
                         {current && (
-                          <Tag.Root
+                          <Tag
                             variant="subtle"
                             size="md"
                             borderRadius="3xl"
@@ -75,8 +79,8 @@ const Experience = () => {
                             py={1}
                             backgroundColor="hsl(var(--primary) / 0.1)"
                           >
-                            <Tag.Label>Current</Tag.Label>
-                          </Tag.Root>
+                            Current
+                          </Tag>
                         )}
                       </div>
                     </div>
@@ -100,7 +104,7 @@ const Experience = () => {
                         </span>
                       </div>
                     </div>
-                  </Timeline.Title>
+                  </TimelineTitle>
                   <div className="job-responsibilities">
                     <Text
                       as="h4"
@@ -119,11 +123,11 @@ const Experience = () => {
                       ))}
                     </ul>
                   </div>
-                </Timeline.Content>
-              </Timeline.Item>
+                </TimelineContent>
+              </TimelineItem>
             ),
           )}
-        </Timeline.Root>
+        </TimelineRoot>
       </div>
     </div>
   );

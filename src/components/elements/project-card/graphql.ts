@@ -1,6 +1,6 @@
-import { gql } from "@apollo/client";
+import { graphql } from "@/graphql/types";
 
-const repositoryQuery = gql(`
+const repositoryQuery = graphql(`
   query RepositoryQuery($owner: String = "fransiscushermanto", $name: String!) {
     repository(owner: $owner, name: $name) {
       isArchived

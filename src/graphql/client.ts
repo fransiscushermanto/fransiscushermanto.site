@@ -1,7 +1,8 @@
-import { SSR_API_BASE_PATH } from "@/constants/config";
-import { ApolloClient, InMemoryCache } from "@apollo/client-integration-nextjs";
+import { GraphQLClient } from "graphql-request";
 
-function getGraphQLUri() {
+import { SSR_API_BASE_PATH } from "@/constants/config";
+
+export function getGraphQLUri() {
   // Local development fallback
   const host = process.env.NEXT_PUBLIC_HOST || "localhost";
   const port = process.env.NEXT_PUBLIC_PORT || "3000";
@@ -21,11 +22,4 @@ function getGraphQLUri() {
   return url.toString();
 }
 
-console.log("GraphQL URI:", getGraphQLUri(), SSR_API_BASE_PATH);
-
-export function makeClient() {
-  return new ApolloClient({
-    uri: getGraphQLUri(),
-    cache: new InMemoryCache(),
-  });
-}
+export const graphqlClient = new GraphQLClient(getGraphQLUri());

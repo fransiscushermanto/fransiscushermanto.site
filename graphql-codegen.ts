@@ -3,9 +3,9 @@ import type { CodegenConfig } from "@graphql-codegen/cli";
 
 const config: CodegenConfig = {
   schema: {
-    [process.env.NEXT_PUBLIC_GRAPHQL_API as string]: {
+    [process.env.GITHUB_GRAPHQL_API as string]: {
       headers: {
-        Authorization: `Bearer ${process.env.NEXT_PUBLIC_GITHUB_PAT}`,
+        Authorization: `Bearer ${process.env.GITHUB_PAT}`,
         "User-Agent": "fransiscushermanto.site",
       },
     },
@@ -15,6 +15,9 @@ const config: CodegenConfig = {
   generates: {
     "./src/graphql/types/": {
       preset: "client",
+      config: {
+        useTypeImports: true,
+      },
     },
   },
   overwrite: true,

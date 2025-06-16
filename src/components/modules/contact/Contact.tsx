@@ -1,14 +1,44 @@
+"use client";
+
 import { cx } from "@pandacss/css";
 import { Card, Icon, Input, Stack, Text, Textarea } from "@chakra-ui/react";
 import { LuMail, LuMapPin } from "react-icons/lu";
+import { useForm } from "react-hook-form";
 
 import { SocialMedia } from "@/components/elements";
+import { Button } from "@/components/ui/button";
+import { Field } from "@/components/ui/field";
+import { toaster } from "@/components/ui/toaster";
 
 import { contactCss } from "./styles";
-import { Field } from "@/components/ui/field";
-import { Button } from "@/components/ui/button";
 
 const Contact = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  function onSubmit() {
+    const promise = new Promise<void>((resolve) => {
+      setTimeout(() => resolve(), 5000);
+    });
+
+    toaster.promise(promise, {
+      success: {
+        title: "Message Sent!",
+        description:
+          "Thank you for your message. I will get back to you as soon as possible.",
+      },
+      error: {
+        title: "Message Failed to Sent!",
+        description:
+          "There was an error sending your message. Please try again later.",
+      },
+      loading: { title: "Sending Message...", description: "Please wait" },
+    });
+  }
+
   return (
     <div className={cx("contact-page", "container", contactCss)}>
       <div className="inner-container">
@@ -42,9 +72,7 @@ const Contact = () => {
                 </span>
                 <div className="detail">
                   <div className="detail__label">Location</div>
-                  <span>
-                    Medan, Indonesia
-                  </span>
+                  <span>Medan, Indonesia</span>
                 </div>
               </div>
             </div>
@@ -57,28 +85,72 @@ const Contact = () => {
           </Card.Root>
           <Card.Root className="contact-column">
             <Card.Title mb="6">Send me a message</Card.Title>
-            <form>
+            <form onSubmit={handleSubmit(onSubmit)} noValidate>
               <Stack flexDirection="row" gap="4">
-                <Field label="Name">
-                  <Input name="name" size="sm" placeholder="Your Name" />
-                </Field>
-                <Field label="Email">
+                <Field
+                  label="Name"
+                  invalid={!!errors.name}
+                  errorText={errors.name?.message as string}
+                >
                   <Input
-                    name="email"
+                    size="sm"
+                    placeholder="Your Name"
+                    {...register("name", {
+                      required: {
+                        value: true,
+                        message: "This field is required",
+                      },
+                    })}
+                  />
+                </Field>
+                <Field
+                  label="Email"
+                  invalid={!!errors.email}
+                  errorText={errors.email?.message as string}
+                >
+                  <Input
                     size="sm"
                     placeholder="example@gmail.com"
+                    {...register("email", {
+                      required: {
+                        value: true,
+                        message: "This field is required",
+                      },
+                    })}
                   />
                 </Field>
               </Stack>
-              <Field label="Subject">
-                <Input name="subject" size="sm" placeholder="Subject" />
+              <Field
+                label="Subject"
+                invalid={!!errors.subject}
+                errorText={errors.subject?.message as string}
+              >
+                <Input
+                  size="sm"
+                  placeholder="Subject"
+                  {...register("subject", {
+                    required: {
+                      value: true,
+                      message: "This field is required",
+                    },
+                  })}
+                />
               </Field>
-              <Field label="Message">
+              <Field
+                label="Message"
+                invalid={!!errors.message}
+                errorText={errors.message?.message as string}
+              >
                 <Textarea
-                  name="message"
                   size="sm"
                   placeholder="Message"
                   rows={5}
+                  {...register("message", {
+                    required: {
+                      value: true,
+                      message: "This field is required",
+                    },
+                  })}
                 />
               </Field>
               <Button type="submit">Send Message</Button>

@@ -23,6 +23,18 @@ export const projectCardCss = css({
       columnGap: 2,
       mb: 4,
 
+      "& .chakra-tag": {
+        "&__startElement": {
+          display: "flex",
+          flex: 1,
+        },
+        "&__label": {
+          fontWeight: "medium",
+          whiteSpace: "nowrap",
+          overflow: "auto",
+        },
+      },
+
       "&::-webkit-scrollbar": {
         display: "none",
       },

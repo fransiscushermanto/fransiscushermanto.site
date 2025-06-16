@@ -1,6 +1,6 @@
+import { Card } from "@chakra-ui/react";
 
-import { Card, Skeleton } from "@chakra-ui/react";
-
+import { Skeleton } from "@/components/ui/skeleton";
 import { projectCardCss } from "./styles";
 
 const ProjectCardSkeleton = () => {

@@ -1,7 +1,11 @@
-import { Icon, Tag } from "@chakra-ui/react";
+import { Icon } from "@chakra-ui/react";
+import { cx } from "@pandacss/css";
+
+import { Tag } from "@/components/ui/tag";
 
 import { InfiniteLoopSlider } from "../infinite-loop-slider";
 import type { TechnologiesSliderProps } from "./types";
+import { tagCss } from "./styles";
 
 const TechnologiesSlider = (props: TechnologiesSliderProps) => {
   const { items, isReversed } = props;
@@ -9,29 +13,16 @@ const TechnologiesSlider = (props: TechnologiesSliderProps) => {
   return (
     <InfiniteLoopSlider gap={3} isReversed={isReversed}>
       {items.map(({ icon, name, label }) => (
-        <Tag.Root
-          className="technology"
+        <Tag
+          className={cx("technology", tagCss)}
           variant="subtle"
           rounded="full"
           size="lg"
           key={name}
+          startElement={<Icon color={icon.color}>{icon.element}</Icon>}
         >
-          <Tag.StartElement
-            display="flex"
-            maxW="full"
-            className="technology__icon"
-          >
-            <Icon color={icon.color}>{icon.element}</Icon>
-          </Tag.StartElement>
-          <Tag.Label
-            fontWeight="medium"
-            whiteSpace="nowrap"
-            overflow="auto"
-            className="technology__label"
-          >
-            {label}
-          </Tag.Label>
-        </Tag.Root>
+          {label}
+        </Tag>
       ))}
     </InfiniteLoopSlider>
   );

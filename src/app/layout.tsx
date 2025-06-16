@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 
-import { Provider } from "@/components/ui/provider";
 import { DefaultLayout } from "@/components/layouts";
-import { ApolloWrapper } from "@/graphql/apollo-wrapper";
+import { Provider } from "@/components/ui/provider";
+import { Toaster } from "@/components/ui/toaster";
+import { ReactQueryWrapper } from "@/react-query/react-query-wrapper";
 
 import "./globals.css";
 
@@ -24,16 +25,6 @@ export const metadata: Metadata = {
   description: "Personal Website",
 };
 
-if (process.env.NODE_ENV === "development") {
-  // Adds messages only in a dev environment
-  import("@apollo/client/dev").then(
-    ({ loadDevMessages, loadErrorMessages }) => {
-      loadDevMessages();
-      loadErrorMessages();
-    },
-  );
-}
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -42,11 +33,12 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <Provider>
-          <ApolloWrapper>
+        <ReactQueryWrapper>
+          <Provider>
             <DefaultLayout>{children}</DefaultLayout>
-          </ApolloWrapper>
-        </Provider>
+            <Toaster />
+          </Provider>
+        </ReactQueryWrapper>
       </body>
     </html>
   );

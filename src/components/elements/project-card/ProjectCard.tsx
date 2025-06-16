@@ -2,13 +2,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { useMemo } from "react";
 import { LuGithub, LuExternalLink } from "react-icons/lu";
-import { Card, Tag } from "@chakra-ui/react";
+import { Card, Icon } from "@chakra-ui/react";
 import { cx } from "@pandacss/css";
-import { useSuspenseQuery } from "@apollo/client";
 
 import { Button } from "@/components/ui/button";
+import { Tag } from "@/components/ui/tag";
 import { TECHNOLOGIES, type Technology } from "@/constants/technologies";
-import { RepositoryQueryDocument } from "@/graphql/types/graphql";
+import { useRGQLGetProjectRepository } from "@/repositories/projects";
 
 import { useHandleScrollOnDrag } from "./usecase";
 import type { ProjectCardProps } from "./types";
@@ -19,9 +19,9 @@ const ProjectCard = (props: ProjectCardProps) => {
 
   const bindRef = useHandleScrollOnDrag();
 
-  const { data } = useSuspenseQuery(RepositoryQueryDocument, {
-    fetchPolicy: "cache-and-network",
-    variables: { owner, name: projectName },
+  const { data } = useRGQLGetProjectRepository({
+    owner,
+    projectName,
   });
 
   const repository = data?.repository;
@@ -76,7 +76,7 @@ const ProjectCard = (props: ProjectCardProps) => {
                 if (typeof tag !== "object" && !tech) return null;
 
                 return (
-                  <Tag.Root
+                  <Tag
                     backgroundColor="secondary"
                     fontSize="xs"
                     py={1}
@@ -84,20 +84,14 @@ const ProjectCard = (props: ProjectCardProps) => {
                     key={name}
                     rounded="md"
                     userSelect="none"
+                    {...(icon && {
+                      startElement: (
+                        <Icon color={icon?.color}>{icon?.element}</Icon>
+                      ),
+                    })}
                   >
-                    {icon && (
-                      <Tag.StartElement color={icon.color}>
-                        {icon.element}
-                      </Tag.StartElement>
-                    )}
-                    <Tag.Label
-                      fontWeight="medium"
-                      whiteSpace="nowrap"
-                      overflow="auto"
-                    >
-                      {label}
-                    </Tag.Label>
-                  </Tag.Root>
+                    {label}
+                  </Tag>
                 );
               }),
             [tags],
