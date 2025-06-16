@@ -65,7 +65,7 @@ const Contact = () => {
       <div className="inner-container">
         <h1 className="title heading-text">Contact Me</h1>
         <p className="subtitle sub-heading-text">
-          Feel free to get in touch with me. I am always open to discussing new
+          Feel free to get in touch with me. I am always open to discuss new
           projects, creative ideas or opportunities to be part of your vision.
         </p>
         <div className="contact-row">
