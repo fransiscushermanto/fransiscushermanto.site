@@ -9,7 +9,11 @@ import { SocialMedia } from "@/components/elements";
 import { Button } from "@/components/ui/button";
 import { Field } from "@/components/ui/field";
 import { toaster } from "@/components/ui/toaster";
+import useHandlePreventLeavePage from "@/hooks/use-handle-prevent-leave-page";
+import { useRSendMessage, type ContactParams } from "@/repositories/contact";
+import { deepEqual } from "@/utils/object";
 
+import { defaultValues, TOAST_DURATION } from "./constants";
 import { contactCss } from "./styles";
 
 const Contact = () => {
@@ -17,27 +21,44 @@ const Contact = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+    reset,
+    watch,
+  } = useForm<ContactParams>({
+    defaultValues,
+  });
 
-  function onSubmit() {
-    const promise = new Promise<void>((resolve) => {
-      setTimeout(() => resolve(), 5000);
-    });
+  const { mutateAsync, isPending: isSendingMessage } = useRSendMessage({
+    onSuccess: () => {
+      reset();
+    },
+    onError: (error) => {
+      console.error(error);
+    },
+  });
 
-    toaster.promise(promise, {
+  const isDirty = !deepEqual(defaultValues, watch());
+
+  async function onSubmit(data: ContactParams) {
+    toaster.promise(mutateAsync({ variables: data }), {
       success: {
         title: "Message Sent!",
         description:
           "Thank you for your message. I will get back to you as soon as possible.",
+        duration: TOAST_DURATION,
       },
       error: {
         title: "Message Failed to Sent!",
         description:
           "There was an error sending your message. Please try again later.",
+        duration: TOAST_DURATION,
       },
       loading: { title: "Sending Message...", description: "Please wait" },
     });
   }
+
+  useHandlePreventLeavePage({
+    enabled: isDirty || isSendingMessage,
+  });
 
   return (
     <div className={cx("contact-page", "container", contactCss)}>
@@ -91,6 +112,7 @@ const Contact = () => {
                   label="Name"
                   invalid={!!errors.name}
                   errorText={errors.name?.message as string}
+                  disabled={isSendingMessage}
                 >
                   <Input
                     size="sm"
@@ -107,6 +129,7 @@ const Contact = () => {
                   label="Email"
                   invalid={!!errors.email}
                   errorText={errors.email?.message as string}
+                  disabled={isSendingMessage}
                 >
                   <Input
                     size="sm"
@@ -124,6 +147,7 @@ const Contact = () => {
                 label="Subject"
                 invalid={!!errors.subject}
                 errorText={errors.subject?.message as string}
+                disabled={isSendingMessage}
               >
                 <Input
                   size="sm"
@@ -140,6 +164,7 @@ const Contact = () => {
                 label="Message"
                 invalid={!!errors.message}
                 errorText={errors.message?.message as string}
+                disabled={isSendingMessage}
               >
                 <Textarea
                   size="sm"
@@ -153,7 +178,9 @@ const Contact = () => {
                   })}
                 />
               </Field>
-              <Button type="submit">Send Message</Button>
+              <Button loading={isSendingMessage} type="submit">
+                Send Message
+              </Button>
             </form>
           </Card.Root>
         </div>

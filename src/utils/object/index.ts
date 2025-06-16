@@ -1,3 +1,4 @@
+export * from "./deep-equal";
 export * from "./is-equal";
 export * from "./is-object";
 export * from "./merge";
