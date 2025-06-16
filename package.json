@@ -1,30 +1,61 @@
 {
   "name": "fransiscushermanto",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "prepare": "panda codegen",
     "dev": "rm -rf .next && next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "graphql:generate": "graphql-codegen --config ./graphql-codegen.ts"
   },
   "dependencies": {
-    "@chakra-ui/react": "^3.2.3",
+    "@chakra-ui/react": "^3.19.1",
+    "@emailjs/browser": "^4.4.1",
     "@emotion/react": "^11.13.5",
+    "@tanstack/react-query": "^5.80.7",
+    "abortcontroller-polyfill": "^1.7.8",
+    "graphql": "^16.11.0",
+    "graphql-request": "^7.2.0",
+    "humps": "^2.0.1",
+    "ky": "^1.8.1",
+    "minimatch": "^10.0.3",
+    "motion": "^12.12.2",
     "next": "15.0.4",
-    "next-themes": "^0.4.4",
+    "next-themes": "^0.4.6",
+    "query-string": "^9.2.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "react-icons": "^5.4.0"
+    "react-hook-form": "^7.58.0",
+    "react-icons": "^5.5.0"
   },
   "devDependencies": {
+    "@chakra-ui/cli": "^3.21.0",
+    "@graphql-codegen/cli": "^5.0.6",
     "@pandacss/dev": "^0.49.0",
+    "@parcel/watcher": "^2.5.1",
+    "@tanstack/react-query-devtools": "^5.80.7",
+    "@types/humps": "^2.0.6",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "dotenv": "^16.5.0",
     "eslint": "^8",
     "eslint-config-next": "15.0.4",
     "typescript": "^5"
+  },
+  "browserslist": {
+    "production": [
+      "defaults and supports es6-module",
+      "maintained node versions",
+      "not dead",
+      "not IE 11"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }

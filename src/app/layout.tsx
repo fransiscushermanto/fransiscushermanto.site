@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 
+import { DefaultLayout } from "@/components/layouts";
 import { Provider } from "@/components/ui/provider";
-import { ColorModeButton } from "@/components/ui/color-mode";
+import { Toaster } from "@/components/ui/toaster";
+import { ReactQueryWrapper } from "@/react-query/react-query-wrapper";
 
 import "./globals.css";
 
@@ -29,13 +31,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <Provider>
-          {children}
-
-          <ColorModeButton className="color-switch" />
-        </Provider>
+        <ReactQueryWrapper>
+          <Provider>
+            <DefaultLayout>{children}</DefaultLayout>
+            <Toaster />
+          </Provider>
+        </ReactQueryWrapper>
       </body>
     </html>
   );

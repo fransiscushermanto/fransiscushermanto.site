@@ -72,61 +72,81 @@ export const config = defineConfig({
         },
       },
     },
+    keyframes: {
+      ripples: {
+        "0%": {
+          transform: "translate(-50%, -50%) scale(1)",
+          opacity: 0.4,
+        },
+        "100%": {
+          transform: "translate(-50%, -50%) scale(3)",
+          opacity: 0,
+        },
+      },
+    },
     semanticTokens: {
       colors: {
+        background: {
+          DEFAULT: { value: "hsl(var(--background))" },
+        },
+        foreground: {
+          DEFAULT: { value: "hsl(var(--foreground))" },
+        },
+        card: {
+          DEFAULT: { value: "hsl(var(--card))" },
+        },
+        "card-foreground": {
+          DEFAULT: { value: "hsl(var(--card-foreground))" },
+        },
+        popover: {
+          DEFAULT: { value: "hsl(var(--popover))" },
+        },
+        "popover-foreground": {
+          DEFAULT: { value: "hsl(var(--popover-foreground))" },
+        },
         primary: {
-          value: "{colors.primary.500}",
+          DEFAULT: { value: "hsl(var(--primary))" },
+        },
+        "primary-foreground": {
+          DEFAULT: { value: "hsl(var(--primary-foreground))" },
         },
         secondary: {
-          value: "{colors.secondary.100}",
-          description:
-            "Colors for secondary text, borders, icons, or background sections",
+          DEFAULT: { value: "hsl(var(--secondary))" },
         },
-        tertiary: {
-          value: "#F4F1E1",
-          description:
-            "Colors for backgrounds, card elements, or even hover states",
+        "secondary-foreground": {
+          DEFAULT: { value: "hsl(var(--secondary-foreground))" },
+        },
+        muted: {
+          DEFAULT: { value: "hsl(var(--muted))" },
+        },
+        "muted-foreground": {
+          DEFAULT: { value: "hsl(var(--muted-foreground))" },
         },
         accent: {
-          value: "#F8C146",
-          description:
-            "Colors for highlights or key interactions (such as button hover states) to create contrast and vibrancy",
+          DEFAULT: { value: "hsl(var(--accent))" },
         },
-        link: {
-          value: "#2D6A5D",
-          description: "Colors for links, small icons, or hover effects",
+        "accent-foreground": {
+          DEFAULT: { value: "hsl(var(--accent-foreground))" },
         },
-        bg: {
-          DEFAULT: {
-            value: {
-              _light: "{colors.secondary}",
-              _dark: "{colors.primary.800}",
-            },
-          },
+        destructive: {
+          DEFAULT: { value: "hsl(var(--destructive))" },
         },
-        fg: {
-          DEFAULT: {
-            value: {
-              _light: "{colors.primary}",
-              _dark: "{colors.primary.100}",
-            },
-          },
+        "destructive-foreground": {
+          DEFAULT: { value: "hsl(var(--destructive-foreground))" },
         },
-        "text-primary": {
-          DEFAULT: {
-            value: {
-              _light: "{colors.primary}",
-              _dark: "{colors.primary.100}",
-            },
-          },
+        border: {
+          DEFAULT: { value: "hsl(var(--border))" },
         },
-        "text-secondary": {
-          DEFAULT: {
-            value: {
-              _light: "{colors.secondary.700}",
-              _dark: "{colors.secondary}",
-            },
-          },
+        input: {
+          DEFAULT: { value: "hsl(var(--input))" },
+        },
+        ring: {
+          DEFAULT: { value: "hsl(var(--ring))" },
+        },
+      },
+      radii: {
+        radius: {
+          DEFAULT: { value: "var(--radius)" },
         },
       },
     },
