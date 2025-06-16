@@ -6,6 +6,7 @@ import profilePicture from "@/assets/images/me.jpeg";
 import { Button } from "@/components/ui/button";
 import { SocialMedia } from "@/components/elements/social-media";
 
+import { Underline } from "./shapes";
 import { profileCss } from "./styles";
 
 const Profile = () => {
@@ -17,8 +18,14 @@ const Profile = () => {
       <h1 className="profile__name heading-text">Fransiscus Hermanto</h1>
       <h2 className="profile__job-title muted-text">Software Engineer</h2>
       <p className="profile__description sub-heading-text">
-        I am a frontend developer with 4+ years of experience, passionate about
-        learning, innovation, and creating impactful tools.
+        I am a frontend developer with{" "}
+        <Link href="/experience">
+          <span className="underline">
+            <Underline />
+          </span>
+          4+ years of experience
+        </Link>
+        , passionate about learning, innovation, and creating impactful tools.
       </p>
       <div className="profile__actions">
         <Button size="sm" asChild>

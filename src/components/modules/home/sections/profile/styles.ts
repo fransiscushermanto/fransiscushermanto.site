@@ -21,6 +21,24 @@ export const profileCss = css({
   "& .profile__description": {
     maxW: 700,
     textAlign: "center",
+
+    "& a": {
+      position: "relative",
+      whiteSpace: "nowrap",
+      "& .underline": {
+        display: "flex",
+
+        zIndex: -1,
+        pointerEvents: "none",
+
+        position: "absolute",
+        left: "50%",
+        top: "120%",
+        transform: "translate(-50%, -50%)",
+
+        width: "fit-content",
+      },
+    },
   },
 
   "& .profile__actions": {
