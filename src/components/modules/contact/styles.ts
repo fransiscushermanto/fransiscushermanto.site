@@ -104,6 +104,15 @@ export const contactCss = css({
           display: "flex",
           flexDirection: "column",
           gap: 4,
+
+          "& .chakra-field__root": {
+            "&[data-invalid]": {
+              "& #captcha": {
+                border: "1px solid var(--colors-border-error) !important",
+                borderRadius: "sm",
+              },
+            },
+          },
         },
       },
     },

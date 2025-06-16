@@ -3,4 +3,5 @@ export interface ContactParams {
   email: string;
   message: string;
   subject: string;
+  captchaResponse: string;
 }

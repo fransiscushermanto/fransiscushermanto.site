@@ -1,15 +1,22 @@
 import humps from "humps";
 
-const EMAILJS_URL = "https://api.emailjs.com/api/v1.0/email/send";
+import type { ContactParams } from "@/repositories/contact";
+import type { CaptchaVerifyResponse } from "./types";
 
 export async function POST(request: Request) {
+  const emailJsURL = process.env.EMAILJS_URL ?? "";
   const templateId = process.env.EMAILJS_TEMPLATE_ID ?? "";
   const serviceId = process.env.EMAILJS_SERVICE_ID ?? "";
-  const userId = process.env.EMAILJS_PUBLIC_KEY ?? "";
-  const templateParams = await request.json();
   const accessToken = process.env.EMAILJS_PRIVATE_KEY ?? "";
+  const userId = process.env.EMAILJS_PUBLIC_KEY ?? "";
+  const captchaVerifyURL = process.env.CAPTCHA_VERIFY_URL ?? "";
+  const captchaSecretKey = process.env.CAPTCHA_SECRET_KEY ?? "";
 
-  const data = {
+  const { captchaResponse, ...templateParams } = humps.camelizeKeys(
+    await request.json(),
+  ) as ContactParams;
+
+  const sendEmailData = {
     ...humps.decamelizeKeys({
       serviceId,
       templateId,
@@ -20,24 +27,48 @@ export async function POST(request: Request) {
   };
 
   try {
-    console.log(data);
-    const res = await fetch(EMAILJS_URL, {
+    const captchaRes = await fetch(captchaVerifyURL, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams({
+        secret: captchaSecretKey,
+        response: captchaResponse,
+      }),
     });
 
-    console.log("response", res);
-    if (!res.ok) {
-      return new Response(res.statusText, {
-        status: res.status,
-        headers: res.headers,
+    const { errorCodes, success } = humps.camelizeKeys(
+      await captchaRes.json(),
+    ) as CaptchaVerifyResponse;
+
+    if (
+      success === false &&
+      !(errorCodes?.length === 1 && errorCodes[0] === "already-seen-response")
+    ) {
+      return Response.json(
+        {
+          errors: { captchaResponse: "Invalid captcha response" },
+          meta: { errorCodes },
+        },
+        {
+          status: 400,
+        },
+      );
+    }
+
+    const sendEmailRes = await fetch(emailJsURL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(sendEmailData),
+    });
+
+    if (!sendEmailRes.ok) {
+      return Response.json(sendEmailRes.statusText, {
+        status: sendEmailRes.status,
+        headers: sendEmailRes.headers,
       });
     }
 
-    return new Response("Email sent successfully", {
-      status: res.status,
-    });
+    return new Response(null, { status: 204 });
   } catch (error) {
     console.error("EmailJS error:", error);
     throw error;

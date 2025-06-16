@@ -1,9 +1,12 @@
 "use client";
 
-import { cx } from "@pandacss/css";
+import { useRef } from "react";
+import HCaptcha from "@hcaptcha/react-hcaptcha";
 import { Card, Icon, Input, Stack, Text, Textarea } from "@chakra-ui/react";
 import { LuMail, LuMapPin } from "react-icons/lu";
 import { useForm } from "react-hook-form";
+import { cx } from "@pandacss/css";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 import { SocialMedia } from "@/components/elements";
 import { Button } from "@/components/ui/button";
@@ -12,34 +15,45 @@ import { toaster } from "@/components/ui/toaster";
 import useHandlePreventLeavePage from "@/hooks/use-handle-prevent-leave-page";
 import { useRSendMessage, type ContactParams } from "@/repositories/contact";
 import { deepEqual } from "@/utils/object";
+import { HCAPTCHA_SITE_KEY } from "@/constants/config";
 
-import { defaultValues, TOAST_DURATION } from "./constants";
+import { contactScheme, defaultValues, TOAST_DURATION } from "./constants";
 import { contactCss } from "./styles";
+import { setErrors } from "@/utils/react-hook-form";
 
 const Contact = () => {
+  const hcaptchaRef = useRef<HCaptcha>(null);
+
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
     watch,
+    setValue,
+    setError,
   } = useForm<ContactParams>({
     defaultValues,
+    resolver: yupResolver(contactScheme),
   });
 
-  const { mutateAsync, isPending: isSendingMessage } = useRSendMessage({
-    onSuccess: () => {
-      reset();
-    },
-    onError: (error) => {
-      console.error(error);
-    },
-  });
+  const { mutateAsync: sendMessage, isPending: isSendingMessage } =
+    useRSendMessage({
+      onSuccess: () => {
+        hcaptchaRef.current?.resetCaptcha();
+        reset();
+      },
+      onError: (error) => {
+        if (error.payload.errors) {
+          setErrors(error.payload.errors, setError);
+        }
+      },
+    });
 
   const isDirty = !deepEqual(defaultValues, watch());
 
   async function onSubmit(data: ContactParams) {
-    toaster.promise(mutateAsync({ variables: data }), {
+    toaster.promise(sendMessage({ variables: data }), {
       success: {
         title: "Message Sent!",
         description:
@@ -176,6 +190,18 @@ const Contact = () => {
                       message: "This field is required",
                     },
                   })}
+                />
+              </Field>
+              <Field
+                invalid={!!errors.captchaResponse}
+                errorText={errors.captchaResponse?.message as string}
+                disabled={isSendingMessage}
+              >
+                <HCaptcha
+                  ref={hcaptchaRef}
+                  id="captcha"
+                  sitekey={HCAPTCHA_SITE_KEY}
+                  onVerify={(token) => setValue("captchaResponse", token)}
                 />
               </Field>
               <Button loading={isSendingMessage} type="submit">
