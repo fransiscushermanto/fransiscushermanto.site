@@ -85,6 +85,11 @@ export const config = defineConfig({
       },
     },
     semanticTokens: {
+      zIndex: {
+        header: {
+          DEFAULT: { value: "token(zIndex.sticky)" },
+        },
+      },
       colors: {
         background: {
           DEFAULT: { value: "hsl(var(--background))" },
