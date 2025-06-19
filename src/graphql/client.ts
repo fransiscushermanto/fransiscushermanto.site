@@ -15,7 +15,7 @@ export function getGraphQLUri() {
   }
 
   if (process.env.NODE_ENV === "production") {
-    const nextURL = process.env.NEXT_PUBLIC_VERCEL_URL;
+    const nextURL = process.env.NEXT_PUBLIC_VERCEL_BRANCH_URL;
     if (host === "localhost" && !!nextURL) {
       url.host = nextURL;
       url.protocol = "https";
