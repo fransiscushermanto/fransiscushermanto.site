@@ -1,17 +1,23 @@
 "use client";
 
-import Link from "next/link";
-import { Text } from "@chakra-ui/react";
+import { IconButton, Text, useDisclosure } from "@chakra-ui/react";
 import { cx } from "@pandacss/css";
 import { usePathname } from "next/navigation";
+import { GiHamburgerMenu } from "react-icons/gi";
 
-import { ColorModeButton } from "@/components/ui/color-mode";
+import { Link } from "@/components/elements/link";
+import { ColorModeButton, ColorModeSwitch } from "@/components/ui/color-mode";
 import { Logo } from "@/components/shapes";
-import { NAV_ITEMS } from "./constants";
-import { headerCss } from "./styles";
+import useIsMobile from "@/hooks/use-is-mobile";
+import { MobileMenuDrawer } from "./components";
+import { renderMenuItems } from "./utils";
+import { headerCss, mobileMenuDrawerCss } from "./styles";
 
 const Header = () => {
   const pathname = usePathname();
+  const mobileMenuDisclosure = useDisclosure();
+
+  const isMobile = useIsMobile();
 
   return (
     <header className={cx("header", headerCss)}>
@@ -23,21 +29,36 @@ const Header = () => {
             </Link>
           </Text>
           <ul className="nav-items">
-            {NAV_ITEMS.map(({ title, href }) => (
-              <li key={href}>
-                <Link
-                  href={href}
-                  data-active={pathname === href}
-                  className="nav-item"
-                >
-                  {title}
-                </Link>
-              </li>
-            ))}
+            {renderMenuItems({
+              currentPathname: pathname,
+            })}
           </ul>
         </nav>
+        <IconButton
+          className="mobile-nav"
+          variant="ghost"
+          onClick={mobileMenuDisclosure.onOpen}
+        >
+          <GiHamburgerMenu />
+        </IconButton>
         <ColorModeButton className="theme-switch" />
       </div>
+
+      <MobileMenuDrawer
+        open={isMobile && mobileMenuDisclosure.open}
+        onClose={mobileMenuDisclosure.onClose}
+        className={mobileMenuDrawerCss}
+      >
+        <ul className="nav-items">
+          {renderMenuItems({
+            currentPathname: pathname,
+            onClick: mobileMenuDisclosure.onClose,
+          })}
+          <li className="nav-items__item">
+            <ColorModeSwitch />
+          </li>
+        </ul>
+      </MobileMenuDrawer>
     </header>
   );
 };

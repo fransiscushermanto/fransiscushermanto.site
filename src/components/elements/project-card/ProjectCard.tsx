@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 import { useMemo } from "react";
 import { LuGithub, LuExternalLink } from "react-icons/lu";
 import { Card, Icon } from "@chakra-ui/react";
@@ -10,6 +9,7 @@ import { Tag } from "@/components/ui/tag";
 import { TECHNOLOGIES, type Technology } from "@/constants/technologies";
 import { useRGQLGetProjectRepository } from "@/repositories/projects";
 
+import { Link } from "../link";
 import { useHandleScrollOnDrag } from "./usecase";
 import type { ProjectCardProps } from "./types";
 import { projectCardCss } from "./styles";
