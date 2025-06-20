@@ -35,8 +35,6 @@
     --dot-pattern: rgba(0, 0, 0, 0.3);
 
     --header-height: 4rem;
-
-    --z-index-header: 100;
   }
 
   .dark {
@@ -92,8 +90,12 @@
     letter-spacing: -0.025em;
     color: hsl(var(--foreground));
 
-    background: linear-gradient(135deg, hsl(var(--foreground)) 0%, hsl(var(--foreground) / .9) 100%);
-    text-shadow: 0 0 40px hsl(var(--primary) / .2);
+    background: linear-gradient(
+      135deg,
+      hsl(var(--foreground)) 0%,
+      hsl(var(--foreground) / 0.9) 100%
+    );
+    text-shadow: 0 0 40px hsl(var(--primary) / 0.2);
     background-clip: text;
     position: relative;
 
@@ -150,11 +152,12 @@
 
   .shadow-md {
     --shadow-color: #0000001a;
-    --shadow: 0 4px 6px -1px var(--shadow-color),
-      0 2px 4px -2px var(--shadow-color);
-    --shadow-colored: 0 4px 6px -1px var(--shadow-color),
-      0 2px 4px -2px var(--shadow-color);
-    box-shadow: var(--ring-offset-shadow, 0 0 #0000),
-      var(--ring-shadow, 0 0 #0000), var(--shadow);
+    --shadow:
+      0 4px 6px -1px var(--shadow-color), 0 2px 4px -2px var(--shadow-color);
+    --shadow-colored:
+      0 4px 6px -1px var(--shadow-color), 0 2px 4px -2px var(--shadow-color);
+    box-shadow:
+      var(--ring-offset-shadow, 0 0 #0000), var(--ring-shadow, 0 0 #0000),
+      var(--shadow);
   }
 }

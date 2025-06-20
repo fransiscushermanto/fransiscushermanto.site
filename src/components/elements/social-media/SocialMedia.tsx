@@ -1,8 +1,8 @@
-import Link from "next/link";
 import { cx } from "@pandacss/css";
 
 import { SOCIAL_MEDIAS } from "@/constants/social-medias";
 
+import { Link } from "../link";
 import { socialMediaCss } from "./styles";
 
 const SocialMedia = () => {

@@ -32,10 +32,10 @@ export const headerCss = css({
           display: "flex",
         },
 
-        "& .nav-item": {
+        "&__item": {
           color: "token(hsl(var(--foreground))/ 0.6)",
 
-          "&[data-active='true']": {
+          "&__link[data-active='true']": {
             color: "hsl(var(--foreground))",
             fontWeight: "bold",
           },
@@ -48,6 +48,58 @@ export const headerCss = css({
 
     "& .theme-switch": {
       ml: "auto",
+      display: "none",
+
+      md: {
+        display: "flex",
+      },
+    },
+
+    "& .mobile-nav": {
+      ml: "auto",
+      display: "flex",
+      md: {
+        display: "none",
+      },
+    },
+  },
+});
+
+export const mobileMenuDrawerCss = css({
+  "& .nav-items": {
+    display: "flex",
+    flexDirection: "column",
+    rowGap: 4,
+
+    "&__item": {
+      display: "inline-flex",
+      alignItems: "center",
+
+      padding: 2,
+      "&__link": {
+        position: "relative",
+        "&:after": {
+          content: '""',
+
+          position: "absolute",
+          top: "100%",
+          transform: "translateY(-50%)",
+
+          display: "block",
+          width: "0",
+          height: "1px",
+          backgroundColor: "hsl(var(--primary))",
+          marginTop: 2,
+
+          transition: "width 0.1s ease-in-out",
+        },
+
+        "&:hover, &[data-active=true]": {
+          "&:after": {
+            width: "full",
+          },
+        },
+      },
     },
   },
 });
