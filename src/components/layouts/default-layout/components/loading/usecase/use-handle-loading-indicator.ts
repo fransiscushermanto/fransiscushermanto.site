@@ -24,8 +24,10 @@ export function useHandleLoadingIndicator() {
 
   useEffect(() => {
     function handleNavigate(destination: string) {
-      console.log(destination, prevPathnameRef.current);
-      if (destination === prevPathnameRef.current) {
+      if (
+        destination.startsWith("http") ||
+        destination === prevPathnameRef.current
+      ) {
         return;
       }
       setIsHideLoadingIndicator(false);

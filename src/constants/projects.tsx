@@ -10,22 +10,10 @@ export interface Project {
 
 export const PROJECTS: Array<Project> = [
   {
-    name: "bloomify-invoice-app",
-    tags: [
-      "pwa",
-      "vite",
-      "react-router",
-      "chakraui",
-      "html",
-      "typescript",
-      "javascript",
-    ],
-  },
-  {
     name: "fransiscushermanto.site",
     tags: [
       "graphql",
-      "apollo",
+      "react-query",
       "pandacss",
       "nextjs",
       "chakraui",
@@ -67,6 +55,20 @@ export const PROJECTS: Array<Project> = [
   {
     name: "ArtPlex",
     tags: ["php", "react", "html", "mysql", "javascript", "sass"],
+  },
+  {
+    name: "Chatter",
+    tags: [
+      "socket",
+      "react",
+      "passport",
+      "html",
+      "nodejs",
+      "mysql",
+      "javascript",
+      "express",
+      "css3",
+    ],
   },
   {
     name: "movie-list",
