@@ -27,6 +27,7 @@ import {
   SiVitest,
   SiReactrouter,
   SiSass,
+  SiPassport,
 } from "react-icons/si";
 
 export interface Technology {
@@ -261,6 +262,14 @@ export const TECHNOLOGIES = [
     icon: {
       color: { _light: "pink.600", _dark: "pink.300" },
       element: <SiSass />,
+    },
+  },
+  {
+    name: "passport",
+    label: "Passport.js",
+    icon: {
+      color: { _light: "blue.600", _dark: "blue.300" },
+      element: <SiPassport />,
     },
   },
 ] as const;
