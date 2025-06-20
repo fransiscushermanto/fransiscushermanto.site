@@ -1,12 +1,12 @@
 "use client";
 
-import Link from "next/link";
 import dynamic from "next/dynamic";
 import { cx } from "@pandacss/css";
 
 import { PROJECTS } from "@/constants/projects";
 import { Button } from "@/components/ui/button";
 import { ProjectCardSkeleton } from "@/components/elements/project-card";
+import { Link } from "@/components/elements/link";
 
 import { featuredProjectCss } from "./styles";
 

@@ -1,10 +1,10 @@
-import Link from "next/link";
 import Image from "next/image";
 import { cx } from "@pandacss/css";
 
 import profilePicture from "@/assets/images/me.jpeg";
 import { Button } from "@/components/ui/button";
 import { SocialMedia } from "@/components/elements/social-media";
+import { Link } from "@/components/elements/link";
 
 import { Underline } from "./shapes";
 import { profileCss } from "./styles";

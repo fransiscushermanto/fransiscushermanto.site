@@ -1,17 +1,14 @@
 "use client";
 
-import Link from "next/link";
-import { useCallback } from "react";
 import { IconButton, Text, useDisclosure } from "@chakra-ui/react";
 import { cx } from "@pandacss/css";
 import { usePathname } from "next/navigation";
 import { GiHamburgerMenu } from "react-icons/gi";
 
+import { Link } from "@/components/elements/link";
 import { ColorModeButton, ColorModeSwitch } from "@/components/ui/color-mode";
 import { Logo } from "@/components/shapes";
-import { callAllFn } from "@/utils/fn";
 import useIsMobile from "@/hooks/use-is-mobile";
-import { useRouteEventContext } from "../../hooks";
 import { MobileMenuDrawer } from "./components";
 import { renderMenuItems } from "./utils";
 import { headerCss, mobileMenuDrawerCss } from "./styles";
@@ -19,15 +16,6 @@ import { headerCss, mobileMenuDrawerCss } from "./styles";
 const Header = () => {
   const pathname = usePathname();
   const mobileMenuDisclosure = useDisclosure();
-
-  const routeEvents = useRouteEventContext();
-
-  const onNavigate = useCallback(
-    (destination: string) => {
-      routeEvents.emit("navigate", destination);
-    },
-    [routeEvents],
-  );
 
   const isMobile = useIsMobile();
 
@@ -43,7 +31,6 @@ const Header = () => {
           <ul className="nav-items">
             {renderMenuItems({
               currentPathname: pathname,
-              onClick: onNavigate,
             })}
           </ul>
         </nav>
@@ -65,7 +52,7 @@ const Header = () => {
         <ul className="nav-items">
           {renderMenuItems({
             currentPathname: pathname,
-            onClick: callAllFn(onNavigate, mobileMenuDisclosure.onClose),
+            onClick: mobileMenuDisclosure.onClose,
           })}
           <li className="nav-items__item">
             <ColorModeSwitch />

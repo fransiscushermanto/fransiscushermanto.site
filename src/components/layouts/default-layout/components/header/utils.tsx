@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "@/components/elements/link";
 import { NAV_ITEMS } from "./constants";
 
 export function renderMenuItems({
@@ -6,7 +6,7 @@ export function renderMenuItems({
   onClick,
 }: {
   currentPathname: string;
-  onClick: (path: string) => void;
+  onClick?: (path: string) => void;
 }): React.ReactNode[] {
   return NAV_ITEMS.map(({ href, title }) => (
     <li key={href} className="nav-items__item">
@@ -14,8 +14,7 @@ export function renderMenuItems({
         href={href}
         data-active={currentPathname === href}
         className="nav-items__item__link"
-        prefetch={false}
-        onClick={() => onClick(href)}
+        onClick={() => onClick?.(href)}
       >
         {title}
       </Link>
