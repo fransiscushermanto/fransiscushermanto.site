@@ -1,4 +1,4 @@
-import { cx } from "@pandacss/css";
+import { cx } from "@styled-system/css";
 
 import { SocialMedia } from "@/components/elements";
 import { footerCss } from "./styles";

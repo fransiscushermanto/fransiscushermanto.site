@@ -1,11 +1,13 @@
-import dynamic from "next/dynamic";
+import dynamicImport from "next/dynamic";
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 
 import { PROJECTS } from "@/constants/projects";
 import { queryClient } from "@/react-query/client";
 import { graphqlGetProjectRepository } from "@/repositories/projects";
 
-const Home = dynamic(() =>
+export const dynamic = "force-dynamic";
+
+const Home = dynamicImport(() =>
   import("@/components/modules/home").then((module) => module.Home),
 );
 

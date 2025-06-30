@@ -1,5 +1,5 @@
 import React, { Children } from "react";
-import { cx } from "@pandacss/css";
+import { cx } from "@styled-system/css";
 import { Stack } from "@chakra-ui/react";
 
 import type { InfiniteLoopSliderProps } from "./types";

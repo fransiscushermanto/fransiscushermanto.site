@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { cx } from "@pandacss/css";
+import { cx } from "@styled-system/css";
 
 import profilePicture from "@/assets/images/me.jpeg";
 import { Button } from "@/components/ui/button";
@@ -13,7 +13,12 @@ const Profile = () => {
   return (
     <section className={cx("profile", profileCss)}>
       <div className="profile__picture shadow-md">
-        <Image src={profilePicture} alt="profile-picture" />
+        <Image
+          src={profilePicture}
+          priority
+          decoding="sync"
+          alt="profile-picture"
+        />
       </div>
       <h1 className="profile__name heading-text">Fransiscus Hermanto</h1>
       <h2 className="profile__job-title muted-text">Software Engineer</h2>

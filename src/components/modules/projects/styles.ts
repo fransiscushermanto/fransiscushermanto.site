@@ -1,4 +1,4 @@
-import { css } from "@pandacss/css";
+import { css } from "@styled-system/css";
 
 export const projectsCss = css({
   display: "flex",

@@ -1,25 +1,13 @@
 "use client";
 
-import dynamic from "next/dynamic";
-import { cx } from "@pandacss/css";
+import { cx } from "@styled-system/css";
 
 import { PROJECTS } from "@/constants/projects";
 import { Button } from "@/components/ui/button";
-import { ProjectCardSkeleton } from "@/components/elements/project-card";
+import { ProjectCard } from "@/components/elements/project-card";
 import { Link } from "@/components/elements/link";
 
 import { featuredProjectCss } from "./styles";
-
-const ProjectCard = dynamic(
-  () =>
-    import("@/components/elements/project-card").then(
-      (module) => module.ProjectCard,
-    ),
-  {
-    ssr: false,
-    loading: () => <ProjectCardSkeleton />,
-  },
-);
 
 const FeaturedProject = () => {
   return (
