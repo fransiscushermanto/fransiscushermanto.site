@@ -1,7 +1,7 @@
 "use client";
 
 import { Portal } from "@chakra-ui/react";
-import { css, cx } from "@pandacss/css";
+import { css, cx } from "@styled-system/css";
 
 import { useHandleLoadingIndicator } from "./usecase";
 

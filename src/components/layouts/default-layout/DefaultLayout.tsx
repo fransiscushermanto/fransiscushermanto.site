@@ -1,6 +1,6 @@
 'use client';
 
-import { cx } from "@pandacss/css";
+import { cx } from "@styled-system/css";
 
 import { RouteEventProvider, useRouteEvent } from "./hooks";
 import { Background, Footer, Header, Loading } from "./components";

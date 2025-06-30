@@ -1,22 +1,8 @@
-"use client";
-
-import dynamic from "next/dynamic";
-import { cx } from "@pandacss/css";
+import { cx } from "@styled-system/css";
 
 import { PROJECTS } from "@/constants/projects";
-import { ProjectCardSkeleton } from "@/components/elements/project-card";
+import { ProjectCard } from "@/components/elements/project-card";
 import { projectsCss } from "./styles";
-
-const ProjectCard = dynamic(
-  () =>
-    import("@/components/elements/project-card").then(
-      (module) => module.ProjectCard,
-    ),
-  {
-    ssr: false,
-    loading: () => <ProjectCardSkeleton />,
-  },
-);
 
 const Projects = () => {
   return (

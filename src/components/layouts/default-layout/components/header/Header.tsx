@@ -1,7 +1,7 @@
 "use client";
 
 import { IconButton, Text, useDisclosure } from "@chakra-ui/react";
-import { cx } from "@pandacss/css";
+import { cx } from "@styled-system/css";
 import { usePathname } from "next/navigation";
 import { GiHamburgerMenu } from "react-icons/gi";
 

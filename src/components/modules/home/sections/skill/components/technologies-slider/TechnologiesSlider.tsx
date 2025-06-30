@@ -1,5 +1,5 @@
 import { Icon } from "@chakra-ui/react";
-import { cx } from "@pandacss/css";
+import { cx } from "@styled-system/css";
 
 import { Tag } from "@/components/ui/tag";
 

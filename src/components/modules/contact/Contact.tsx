@@ -5,7 +5,7 @@ import HCaptcha from "@hcaptcha/react-hcaptcha";
 import { Card, Icon, Input, Stack, Text, Textarea } from "@chakra-ui/react";
 import { LuMail, LuMapPin } from "react-icons/lu";
 import { useForm } from "react-hook-form";
-import { cx } from "@pandacss/css";
+import { cx } from "@styled-system/css";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 import { SocialMedia } from "@/components/elements";

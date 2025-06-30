@@ -1,4 +1,4 @@
-import { cx } from "@pandacss/css";
+import { cx } from "@styled-system/css";
 
 import { TECHNOLOGIES } from "@/constants/technologies";
 

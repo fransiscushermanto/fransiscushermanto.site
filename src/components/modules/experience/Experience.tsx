@@ -1,6 +1,6 @@
 import { LuBriefcase, LuMapPin, LuCalendar } from "react-icons/lu";
 import { Icon, Text } from "@chakra-ui/react";
-import { cx } from "@pandacss/css";
+import { cx } from "@styled-system/css";
 
 import {
   TimelineRoot,
